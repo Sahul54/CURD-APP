@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    firstName: {
+    fname: {
         type: String,
         required: true
     },
-    lastName: {
+    lname: {
         type: String,
         required: true
     },
@@ -13,10 +13,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password: { // Corrected the typo here
+    password: {
         type: String,
         required: true
     },
+    image: {
+        type: String, // This will store the URL of the image (local path or Cloudinary URL)
+        required: false
+    }
 });
 
 export default mongoose.model("User", userSchema);
