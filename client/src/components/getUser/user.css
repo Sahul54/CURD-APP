@@ -1,55 +1,154 @@
-.userTable{
+.userTable {
     width: 60%;
     background-color: white;
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     margin: 50px auto;
     padding: 50px;
+    border: 2px solid #ccc;
 }
 
-.addButton{
-   text-decoration: none;
-   background-color: purple;
-   color: white;
-   font-weight: 500;
-   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
-   border-radius: 5px;
-   padding: 10px;
+.addButton {
+    text-decoration: none;
+    background-color: purple;
+    color: white;
+    font-weight: 500;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
 }
 
-.userTable table{
+.addButton:hover {
+    background-color: darkorchid;
+    transform: scale(1.05);
+}
+
+.userTable table {
     width: 100%;
     margin-top: 30px;
     border-collapse: collapse;
-
-}
-
-.userTable table thead th{
-    background-color: darkblue;
-    color: white;
-    padding: 10px;
-}
-
-.userTable table tbody td{
-    padding: 10px;
+    border: 2px solid #ddd;
     text-align: center;
 }
 
-.actionButtons button{
-    border: 0;
+.userTable table thead th {
+    background-color: darkblue;
+    color: white;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.userTable table tbody td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.img img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.actionButtons button {
+    border: none;
     outline: none;
     background: red;
-    padding: 8px 10px;
+    padding: 8px 12px;
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.actionButtons a{
+.actionButtons button:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+
+.actionButtons a {
     background: green;
-    padding: 6px 10px;
+    padding: 8px 12px;
     color: white;
     border-radius: 5px;
-    margin: 0 10px;
     text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actionButtons a:hover {
+    background-color: darkgreen;
+    transform: scale(1.05);
+}
+
+.userTable table tbody td:last-child {
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .userTable {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .userTable table thead th,
+    .userTable table tbody td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .addButton {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .actionButtons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .actionButtons button,
+    .actionButtons a {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .userTable {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .userTable table thead th,
+    .userTable table tbody td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .addButton {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .actionButtons button,
+    .actionButtons a {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
 }

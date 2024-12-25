@@ -16,7 +16,7 @@ function App() {
       element: <Add  />,
     },
     {
-      path: "/edit",
+      path: "/Edit/:id",
       element: <Edit />
     }
   ])

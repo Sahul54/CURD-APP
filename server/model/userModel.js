@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
     image: {
         type: String, // This will store the URL of the image (local path or Cloudinary URL)

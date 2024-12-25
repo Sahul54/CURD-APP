@@ -1,64 +1,92 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
-import "./add.css";
+import axios from 'axios';
 import toast from 'react-hot-toast';
+import './add.css';
 
 const Add = () => {
+  const [user, setUser] = useState({ 
+    fname: '',
+    lname: '',
+    email: '' 
+    });
 
-  const users = {
-    fame:"",
-    lname:"",
-    email:"",
-    password:""
-  }
-
-  const [user, setUser] = useState(users);
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
-  const inputHandler = (e) =>{
-      const {name, value} = e.target;
-      setUser({...user, [name]:value});
-  }
+  const inputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
 
-  const submitForm = async(e) =>{
+  const fileChangeHandler = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const submitForm = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8000/api/create", user)
-    .then((response)=>{
-       toast.success(response.data.msg, {position:"top-right"})
-       navigate("/")
-    })
-    .catch(error => console.log(error))
-  }
+
+    // Check if all fields are filled
+    if (!user.fname || !user.lname || !user.email || !image) {
+        toast.error('All fields are required', { position: 'top-right' });
+        return;
+    } 
+
+    const formData = new FormData();
+    formData.append('fname', user.fname);
+    formData.append('lname', user.lname);
+    formData.append('email', user.email);
+    formData.append('image', image);
+
+
+    try {
+        const response = await axios.post('http://localhost:8000/api/create', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Required for file uploads
+            },
+        });
+
+        if (response.status === 200) {
+            toast.success('User added successfully', { position: 'top-right' });
+            console.log("Success:", response.data);
+            navigate('/'); // Redirect to the main page
+        } else {
+            throw new Error('Unexpected response from the server');
+        }
+    } catch (error) {
+        toast.error('Failed to add user', { position: 'top-right' });
+        console.error("Error:", error.message || error.response?.data || error);
+    }
+};
 
 
   return (
-    <div className='addUser'>
-        <Link to={"/"}>Back</Link>
-        <h3>Add new user</h3>
-        <form className='addUserForm' onSubmit={submitForm}>
-            <div className="inputGroup">
-                <label htmlFor="fname">First name</label>
-                <input type="text" onChange={inputHandler} id="fname" name="fname" autoComplete='off' placeholder='First name' />
-            </div>
-            <div className="inputGroup">
-                <label htmlFor="lname">Last name</label>
-                <input type="text" onChange={inputHandler} id="lname" name="lname" autoComplete='off' placeholder='Last name' />
-            </div>
-            <div className="inputGroup">
-                <label htmlFor="email">Email</label>
-                <input type="email" onChange={inputHandler} id="email" name="email" autoComplete='off' placeholder='Email' />
-            </div>
-            <div className="inputGroup">
-                <label htmlFor="password">Password</label>
-                <input type="password" onChange={inputHandler} id="password" name="password" autoComplete='off' placeholder='password' />
-            </div>
-            <div className="inputGroup">
-                <button type="submit">ADD USER</button>
-            </div>
-        </form>
+    <div className="addUser">
+      <Link to="/">Back</Link>
+      <h3>Add User</h3>
+      <form className="addUserForm" onSubmit={submitForm} encType="multipart/form-data">
+        <div className="inputGroup">
+          <label htmlFor="fname">First name</label>
+          <input type="text" id="fname" name="fname" value={user.fname} onChange={inputChangeHandler} placeholder="First name" />
+        </div>
+        <div className="inputGroup">
+          <label htmlFor="lname">Last name</label>
+          <input type="text" id="lname" name="lname" value={user.lname} onChange={inputChangeHandler} placeholder="Last name" />
+        </div>
+        <div className="inputGroup">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" name="email" value={user.email} onChange={inputChangeHandler} placeholder="Email" />
+        </div>
+        <div className="inputGroup">
+          <label htmlFor="image">Upload Image</label>
+          <input type="file" id="image" name="image" onChange={fileChangeHandler} />
+        </div>
+        <div className="inputGroup">
+          <button type="submit">Add User</button>
+        </div>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Add
+export default Add;

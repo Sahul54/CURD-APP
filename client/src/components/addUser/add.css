@@ -44,3 +44,43 @@
 .addUser h3{
     margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+    .addUser {
+        width: 60%;
+        padding: 30px;
+    }
+
+    .addUserForm .inputGroup input {
+        padding: 8px;
+    }
+
+    .addUserForm .inputGroup button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .addUser h3 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .addUser {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .addUserForm .inputGroup input {
+        padding: 6px;
+    }
+
+    .addUserForm .inputGroup button {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .addUser h3 {
+        font-size: 16px;
+    }
+}

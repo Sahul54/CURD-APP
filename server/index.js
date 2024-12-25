@@ -1,9 +1,11 @@
-import express from "express";
-import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
-import cors from "cors";
-import route from "./routes/userRoute.js";  // Import routes
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url'; // For working with ES modules
+import route from './routes/userRoute.js'; // Import routes
 
 dotenv.config(); // Load environment variables
 
@@ -14,13 +16,23 @@ app.use(cors());
 const PORT = process.env.PORT || 7000;
 const URL = process.env.MONGOURL;
 
-mongoose.connect(URL).then(() => {
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Connect to MongoDB
+mongoose.connect(URL)
+  .then(() => {
     console.log("DB connected successfully");
 
     app.listen(PORT, () => {
-        console.log(`Server is running on port: ${PORT}`);
+      console.log(`Server is running on port: ${PORT}`);
     });
+  })
+  .catch((error) => console.log(error));
 
-}).catch(error => console.log(error));
+// Serve static files (images) from 'uploads' folder
+app.use('/uploads', express.static(path.resolve('uploads')));
 
-app.use("/api", route);  // Use routes for API
+// Use routes for API
+app.use("/api", route);
