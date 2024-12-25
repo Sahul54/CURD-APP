@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url'; // For working with ES modules
+import { fileURLToPath } from 'url'; 
 import route from './routes/userRoute.js'; // Import routes
 
 dotenv.config(); // Load environment variables

@@ -5,7 +5,6 @@ import Add from './components/addUser/Add';
 import Edit from './components/updateUser/Edit';
 
 function App() {
-  // const [count, setCount] = useState(0)
   const route = createBrowserRouter([
     {
       path: "/",
