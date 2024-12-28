@@ -1,6 +1,6 @@
-# CRUD Application
+#CRUD Application
 
-## Description
+##Description
 This is a **CRUD (Create, Read, Update, Delete)** application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It allows users to manage records (create, read, update, delete) in a simple and intuitive interface.
 
 ## Features
