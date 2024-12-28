@@ -27,7 +27,7 @@ const Edit = () => {
  };
 
  useEffect(() => {
-    axios.get(`http://localhost:8000/api/getOne/${id}`)
+    axios.get(`https://curd-application-drrf.onrender.com/api/getOne/${id}`)
     .then((response) => {
         setUser(response.data);
     })

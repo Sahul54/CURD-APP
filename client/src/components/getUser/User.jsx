@@ -10,7 +10,7 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/getAll');
+        const response = await axios.get('https://curd-application-drrf.onrender.com/api/getAll');
         setUsers(response.data);
       } catch (error) {
         console.error(error);

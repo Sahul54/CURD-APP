@@ -40,7 +40,7 @@ const Add = () => {
 
 
     try {
-        const response = await axios.post('http://localhost:8000/api/create', formData, {
+        const response = await axios.post('https://curd-application-drrf.onrender.com/api/create', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data', // Required for file uploads
             },
